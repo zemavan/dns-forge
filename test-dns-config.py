@@ -42,8 +42,7 @@ os.system("cat /etc/bind/named.conf.local")
 os.system("mkdir -p /etc/bind/zones")
 os.system("touch /etc/bind/zones/db.fruit.com")
 
-with open("/etc/bind/zones/db.fruit.com", "w") as f:
-    f.write("""
+content_zone = """
 $TTL    604800
 @   IN  SOA ns1.fruit.com. admin.fruit.com. (
                 2024010101 ; Serial
@@ -59,7 +58,10 @@ $TTL    604800
 @   IN  A   172.17.0.3
 ns1 IN  A   172.17.0.3
 www IN  A   172.17.0.3
-""")
+"""
+
+with open("/etc/bind/zones/db.fruit.com", "w") as f:
+    f.write(content_zone)
     f.close()
 
 os.system("cat /etc/bind/zones/db.fruit.com")
